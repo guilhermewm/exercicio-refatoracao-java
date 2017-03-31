@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Classes.ListaDeUsuarios;
+import Classes.Usuario;
+
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,7 +19,7 @@ import java.awt.event.ActionEvent;
 public class TelaInicial extends JFrame {
 
 	private JPanel contentPane;
-
+	private ListaDeUsuarios lista_usuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -36,6 +40,17 @@ public class TelaInicial extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicial() {
+		lista_usuarios = new ListaDeUsuarios();
+		
+		Usuario user1 = new Usuario("Pedro", "111", 20, "Masculino", 0);
+		Usuario user2 = new Usuario("João", "222", 22, "Masculino", 1);
+		Usuario user3 = new Usuario("Maria", "333", 15, "Feminino", 2);
+		
+		lista_usuarios.addUsuario(user1);
+		lista_usuarios.addUsuario(user2);
+		lista_usuarios.addUsuario(user3);
+		
+		
 		setTitle("Exerc\u00EDcio de Refatora\u00E7\u00E3o\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,14 +61,15 @@ public class TelaInicial extends JFrame {
 		JButton btnAdmin = new JButton("Admin");
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				TelaAdmin admin = new TelaAdmin(lista_usuarios);
+				admin.setVisible(true);
 			}
 		});
 		
 		JButton btnUsuarios = new JButton("Usu\u00E1rios");
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaUsuarios usuarios = new TelaUsuarios();
+				TelaUsuarios usuarios = new TelaUsuarios(lista_usuarios);
 				usuarios.setVisible(true);
 			}
 		});

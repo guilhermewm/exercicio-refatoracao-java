@@ -12,57 +12,72 @@ public class ListaDeUsuarios {
 		this.contador = 0;
 	}
 	
+	public void addUsuario(Usuario value){
+		lista_usuarios.put(contador, value);		
+		contador++;		
+	}	
+	
+	
 	public Map getTodosUsuarios(){
 		return lista_usuarios;
-	}
-		
-	public void addUsuario(Usuario value){
-		lista_usuarios.put(contador, value);
-		contador++;
-	}
+	}	
 	
-	public Usuario getUsuarioPorCpf(String cpf){
-		Usuario usuario_com_cpf = null;
-		for(int i = 0; lista_usuarios.size() < 0; i++){
+	public String getUsuarioPorCpf(String cpf){
+		String usuario_com_cpf = "";
+		for(int i = 0; lista_usuarios.size() > i; i++){
 			if(lista_usuarios.get(i).getCpf() == cpf){
-				usuario_com_cpf = lista_usuarios.get(i);
+				usuario_com_cpf = lista_usuarios.get(i).toString();
 			}
+		}
+		if(usuario_com_cpf == ""){
+			return "Não há usuário com esse CPF";
 		}
 		return usuario_com_cpf;
 	}
 	
-	public int getQuantidadePessoas(){
-		return lista_usuarios.size();
-	}
-	
+	public int getNumeroDePessoas(){
+		int cont = 0;		
+		for(int i = 0; lista_usuarios.size() > i; i++){
+			cont++;
+		}
+		return cont;
+	}	
 	
 	public double getQuantidadeMasculino(){
 		int quantidade_masculinos = 0;
 		int quantidade_total = 0;
-		for(int i = 0; lista_usuarios.size() < 0; i++){				
+		for(int i = 0; lista_usuarios.size() > i; i++){				
 			if(lista_usuarios.get(i).getGenero() == "Masculino"){
 				quantidade_masculinos++;
 			}			
 			quantidade_total++;
+		}
+		if(quantidade_masculinos == 0){
+			return 0;
+		}else{
+			return ((quantidade_masculinos*100)/quantidade_total);
 		}		
-		return ((quantidade_masculinos*100)/quantidade_total);
 	}
 	
 	public double getQuantidadeFeminino(){
 		int quantidade_femininos = 0;
 		int quantidade_total = 0;
-		for(int i = 0; lista_usuarios.size() < 0; i++){
+		for(int i = 0; lista_usuarios.size() > i; i++){			
 			if(lista_usuarios.get(i).getGenero() == "Feminino"){
 				quantidade_femininos++;
 			}
 			quantidade_total++;
 		}		
-		return ((quantidade_femininos*100)/quantidade_total);
+		if(quantidade_femininos == 0){
+			return 0;
+		}else{
+			return ((quantidade_femininos*100)/quantidade_total);
+		}		
 	}
 	
 	public int getSocios(){
 		int numero_socios = 0;
-		for(int i = 0; lista_usuarios.size() < 0; i++){
+		for(int i = 0; lista_usuarios.size() > i; i++){
 			if(lista_usuarios.get(i).getNum_socio() != 0){
 				numero_socios++;
 			}
@@ -71,7 +86,7 @@ public class ListaDeUsuarios {
 	}
 	
 	public void saiUsuario(String cpf){
-		for(int i = 0; lista_usuarios.size() < 0; i++){
+		for(int i = 0; lista_usuarios.size() > i; i++){
 			if(lista_usuarios.get(i).getCpf() == cpf){
 				lista_usuarios.remove(i);
 			}

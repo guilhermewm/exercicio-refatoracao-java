@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Classes.ListaDeUsuarios;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -26,6 +29,7 @@ public class TelaUsuarios extends JFrame {
 	private JTextField idadeTextField;
 	private JLabel lblGenero;
 	private JTextField numeroSocioTextField;
+	private static ListaDeUsuarios lista_usuarios;
 
 	/**
 	 * Launch the application.
@@ -34,7 +38,7 @@ public class TelaUsuarios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaUsuarios frame = new TelaUsuarios();
+					TelaUsuarios frame = new TelaUsuarios(lista_usuarios);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,8 +49,10 @@ public class TelaUsuarios extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param lista_usuarios 
 	 */
-	public TelaUsuarios() {
+	public TelaUsuarios(ListaDeUsuarios lista_usuarios) {
+		this.lista_usuarios = lista_usuarios;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 323);
 		contentPane = new JPanel();

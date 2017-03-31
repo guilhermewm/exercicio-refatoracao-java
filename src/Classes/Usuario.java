@@ -7,6 +7,12 @@ public class Usuario {
 	private String genero;
 	private int num_socio;
 	
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", genero=" + genero + ", num_socio="
+				+ num_socio + "]";
+	}
+
 	public Usuario(String nome, String cpf, int idade, String genero, int num_socio) {
 		this.nome = nome;
 		this.cpf = cpf;
