@@ -19,6 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class TelaTodosOsUsuarios extends JDialog {
 	private static Map list_todos_usuarios;
@@ -26,7 +27,7 @@ public class TelaTodosOsUsuarios extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		try {
 			TelaTodosOsUsuarios dialog = new TelaTodosOsUsuarios(list_todos_usuarios);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -70,29 +71,39 @@ public class TelaTodosOsUsuarios extends JDialog {
 		}
 		
 		JList list = new JList();
+		
 		DefaultListModel dlm = new DefaultListModel();
-		for(int i = 0; list_todos_usuarios.size() >= i; i++){
-			dlm.addElement(list_todos_usuarios.get(i));
-		}			
+		System.out.println(list_todos_usuarios.size());
+		if(list_todos_usuarios.size() > 0){
+			for(int i = 0; list_todos_usuarios.size() >= i; i++){
+				dlm.addElement(list_todos_usuarios.get(i));
+			}	
+		}else{
+			dlm.addElement("Não há pessoas no estabelecimento");
+		}				
 		list.setModel(dlm);
+		
+		
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, 432, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(12)
-							.addComponent(list, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)))
-					.addContainerGap())
+					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, 432, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(25, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(list, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+					.addGap(34))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(list, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(31)
+					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		getContentPane().setLayout(groupLayout);
 	}
