@@ -3,9 +3,9 @@ package Classes;
 public class Usuario {
 	private String nome;
 	private String cpf;
-	private int idade;
+	private Integer idade;
 	private String genero;
-	private int num_socio;
+	private Integer num_socio;
 	
 	@Override
 	public String toString() {
@@ -13,7 +13,7 @@ public class Usuario {
 				+ num_socio + "]";
 	}
 
-	public Usuario(String nome, String cpf, int idade, String genero, int num_socio) {
+	public Usuario(String nome, String cpf, Integer idade, String genero, Integer num_socio) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -41,7 +41,7 @@ public class Usuario {
 		this.cpf = cpf;
 	}
 
-	public int getIdade() {
+	public Integer getIdade() {
 		return idade;
 	}
 
@@ -57,7 +57,7 @@ public class Usuario {
 		this.genero = genero;
 	}
 
-	public int getNum_socio() {
+	public Integer getNum_socio() {
 		return num_socio;
 	}
 

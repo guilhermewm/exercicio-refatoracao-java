@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classes.ListaDeUsuarios;
+import Classes.Usuario;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -53,7 +54,6 @@ public class TelaUsuarios extends JFrame {
 	 */
 	public TelaUsuarios(ListaDeUsuarios lista_usuarios) {
 		this.lista_usuarios = lista_usuarios;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,6 +112,18 @@ public class TelaUsuarios extends JFrame {
 		});
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Usuario usuario;				
+				if(numeroSocioTextField.getText().trim().isEmpty() == false){
+					usuario = new Usuario(nomeTextField.getText(), cpfTextField.getText(), Integer.parseInt(idadeTextField.getText()), generoComboBox.getSelectedItem().toString(), Integer.valueOf(numeroSocioTextField.getText()));
+				}else{
+					usuario = new Usuario(nomeTextField.getText(), cpfTextField.getText(), Integer.parseInt(idadeTextField.getText()), generoComboBox.getSelectedItem().toString(), 0);
+				}				
+				lista_usuarios.addUsuario(usuario);
+				System.out.println(lista_usuarios.getTodosUsuarios());
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
