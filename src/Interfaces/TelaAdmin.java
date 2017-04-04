@@ -61,6 +61,9 @@ public class TelaAdmin extends JFrame {
 		JButton btnNewButton = new JButton("Usu\u00E1rio por CPF");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!cpfTextField.getText().isEmpty()){	
+					lista_usuarios.getUsuarioPorCpf(cpfTextField.getText());
+				}					
 			}
 		});
 		
