@@ -43,7 +43,7 @@ public class TelaTodosOsUsuarios extends JDialog {
 	 */
 	public TelaTodosOsUsuarios(Map list_todos_usuarios) {
 		list_todos_usuarios = list_todos_usuarios;
-		setBounds(100, 100, 473, 300);
+		setBounds(100, 100, 665, 300);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -70,9 +70,36 @@ public class TelaTodosOsUsuarios extends JDialog {
 			}
 		}
 		
+					
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(14)
+							.addComponent(scrollPane))
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, 432, GroupLayout.PREFERRED_SIZE)))
+					.addGap(15))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		);
+		
 		JList list = new JList();
+		scrollPane.setViewportView(list);
 		
 		DefaultListModel dlm = new DefaultListModel();
+		
 		System.out.println(list_todos_usuarios.size());
 		if(list_todos_usuarios.size() > 0){
 			for(int i = 0; list_todos_usuarios.size() >= i; i++){
@@ -80,31 +107,8 @@ public class TelaTodosOsUsuarios extends JDialog {
 			}	
 		}else{
 			dlm.addElement("Não há pessoas no estabelecimento");
-		}				
+		}	
 		list.setModel(dlm);
-		
-		
-		
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, 432, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(25, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(23)
-					.addComponent(list, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-					.addGap(34))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(list, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-					.addGap(31)
-					.addComponent(buttonPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
 		getContentPane().setLayout(groupLayout);
 	}
 }

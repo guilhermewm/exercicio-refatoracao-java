@@ -59,12 +59,19 @@ public class TelaAdmin extends JFrame {
 		});
 		
 		JButton btnNewButton = new JButton("Usu\u00E1rio por CPF");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
+				TelaUsuarioPorCpf tela_usuario_cpf;
 				if(!cpfTextField.getText().isEmpty()){	
-					lista_usuarios.getUsuarioPorCpf(cpfTextField.getText());
-				}					
-			}
+					tela_usuario_cpf = new TelaUsuarioPorCpf(lista_usuarios.getUsuarioPorCpf(cpfTextField.getText()));					
+					tela_usuario_cpf.setVisible(true);
+				}				
+			}			
+			
+			
+		
+			
+			
 		});
 		
 		cpfTextField = new JTextField();

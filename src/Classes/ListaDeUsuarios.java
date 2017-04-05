@@ -30,9 +30,10 @@ public class ListaDeUsuarios {
 			}
 		}
 		if(usuario_com_cpf == ""){
-			return "Não há usuário com esse CPF";
-		}
-		return usuario_com_cpf;
+			throw new IllegalArgumentException("Não há usuário com esse CPF: " + cpf);
+		}else{
+			return usuario_com_cpf;
+		}		
 	}
 	
 	public int getNumeroDePessoas(){
@@ -86,10 +87,15 @@ public class ListaDeUsuarios {
 	}
 	
 	public void saiUsuario(String cpf){
+		String usuario_com_cpf = "";
 		for(int i = 0; lista_usuarios.size() > i; i++){
 			if(lista_usuarios.get(i).getCpf() == cpf){
-				lista_usuarios.remove(i);
+				usuario_com_cpf = lista_usuarios.get(i).getCpf();
+				lista_usuarios.remove(i);				
 			}
 		}		
+		if(usuario_com_cpf == ""){
+			throw new IllegalArgumentException("Não há usuário com esse CPF: " + cpf);
+		}
 	}
 }
