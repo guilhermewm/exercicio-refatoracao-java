@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Classes.Genero;
 import Classes.ListaDeUsuarios;
+import Classes.Socio;
 import Classes.Usuario;
 
 import javax.swing.GroupLayout;
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
+import javax.naming.directory.InvalidAttributesException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -115,13 +118,40 @@ public class TelaUsuarios extends JFrame {
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario usuario;				
-				if(numeroSocioTextField.getText().trim().isEmpty() == false){
-					usuario = new Usuario(nomeTextField.getText(), cpfTextField.getText(), Integer.parseInt(idadeTextField.getText()), generoComboBox.getSelectedItem().toString(), Integer.valueOf(numeroSocioTextField.getText()));
+				String nome = nomeTextField.getText();
+				String cpf = cpfTextField.getText();
+				String idade = idadeTextField.getText();				
+				String genero = generoComboBox.getSelectedItem().toString();	
+				
+				if(nome.trim().isEmpty() == false && cpf.trim().isEmpty() == false && idade.trim().isEmpty() == false){
+					if(socioSimRadioButton.isSelected()){
+						if(numeroSocioTextField.getText().trim().isEmpty() == false){							
+							if(lista_usuarios.verificaSeSocioExiste(Integer.valueOf(numeroSocioTextField.getText())) == true){
+								System.out.println("Este id de sócio já está cadastrado");
+							}else{
+								if(genero == "Masculino"){
+									usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
+								}else{
+									usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
+								}
+								lista_usuarios.addUsuario(usuario);
+							}							
+						}else{
+							System.out.println("Falta preencher alguns campos");
+						}						
+					}else{
+						if(genero == "Masculino"){
+							usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.NAO, 0);
+						}else{
+							usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.NAO, 0);
+						}
+						lista_usuarios.addUsuario(usuario);
+					}
 				}else{
-					usuario = new Usuario(nomeTextField.getText(), cpfTextField.getText(), Integer.parseInt(idadeTextField.getText()), generoComboBox.getSelectedItem().toString(), 0);
-				}				
-				lista_usuarios.addUsuario(usuario);
-				System.out.println(lista_usuarios.getTodosUsuarios());
+					System.out.println("Falta preencher alguns campos");
+				}
+				
+				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

@@ -4,24 +4,29 @@ public class Usuario {
 	private String nome;
 	private String cpf;
 	private Integer idade;
-	private String genero;
+	private Genero genero;
+	private Socio socio;
 	private Integer num_socio;
+
 	
+
 	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", genero=" + genero + ", num_socio="
-				+ num_socio + "]";
+		return "Usuario [nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", genero=" + genero + ", socio=" + socio
+				+ ", num_socio=" + num_socio + "]";
 	}
 
-	public Usuario(String nome, String cpf, Integer idade, String genero, Integer num_socio) {
+	public Usuario(String nome, String cpf, Integer idade, Genero genero, Socio socio, Integer num_socio) {
+		System.out.println(socio + "  " + genero);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.genero = genero;
-		if(num_socio != 0){
+		this.socio = socio;
+		if(socio.equals(Socio.SIM)){
 			this.num_socio = num_socio;
 		}else{
-			num_socio = 0;
+			this.num_socio = 0;
 		}
 	}
 
@@ -49,14 +54,22 @@ public class Usuario {
 		this.idade = idade;
 	}
 
-	public String getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
+	public Socio getSocio() {
+		return socio;
+	}
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
+	}
+	
 	public Integer getNum_socio() {
 		return num_socio;
 	}
@@ -64,6 +77,7 @@ public class Usuario {
 	public void setNum_socio(int num_socio) {
 		this.num_socio = num_socio;
 	}
+	
 	
 	
 	

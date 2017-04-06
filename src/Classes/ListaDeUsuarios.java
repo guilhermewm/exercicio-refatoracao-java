@@ -35,7 +35,7 @@ public class ListaDeUsuarios {
 		return usuario_com_cpf;
 	}
 	
-	public int getNumeroDePessoas(){
+	public Integer getNumeroDePessoas(){
 		int cont = 0;		
 		for(int i = 0; lista_usuarios.size() > i; i++){
 			cont++;
@@ -47,7 +47,7 @@ public class ListaDeUsuarios {
 		int quantidade_masculinos = 0;
 		int quantidade_total = 0;
 		for(int i = 0; lista_usuarios.size() > i; i++){				
-			if(lista_usuarios.get(i).getGenero() == "Masculino"){
+			if(lista_usuarios.get(i).getGenero() == Genero.MASCULINO){
 				quantidade_masculinos++;
 			}			
 			quantidade_total++;
@@ -63,7 +63,7 @@ public class ListaDeUsuarios {
 		int quantidade_femininos = 0;
 		int quantidade_total = 0;
 		for(int i = 0; lista_usuarios.size() > i; i++){			
-			if(lista_usuarios.get(i).getGenero() == "Feminino"){
+			if(lista_usuarios.get(i).getGenero() == Genero.FEMININO){
 				quantidade_femininos++;
 			}
 			quantidade_total++;
@@ -75,7 +75,7 @@ public class ListaDeUsuarios {
 		}		
 	}
 	
-	public int getSocios(){
+	public Integer getSocios(){
 		int numero_socios = 0;
 		for(int i = 0; lista_usuarios.size() > i; i++){
 			if(lista_usuarios.get(i).getNum_socio() != 0){
@@ -83,6 +83,15 @@ public class ListaDeUsuarios {
 			}
 		}		
 		return numero_socios;
+	}
+	
+	public boolean verificaSeSocioExiste(int num_socio){
+		for(int i = 0; lista_usuarios.size() > i; i++){
+			if(lista_usuarios.get(i).getNum_socio() == num_socio){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void saiUsuario(String cpf){
