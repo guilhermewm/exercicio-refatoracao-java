@@ -85,7 +85,11 @@ public class TelaInicial extends JFrame {
 		JButton btnSairDoRestaurante = new JButton("Sair do restaurante");
 		btnSairDoRestaurante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lista_usuarios.saiUsuario(cpfTextField.getText());
+				if(cpfTextField.getText().isEmpty()){
+					System.out.println("Campo não preenchido");
+				}else{
+					lista_usuarios.saiUsuario(cpfTextField.getText());
+				}				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

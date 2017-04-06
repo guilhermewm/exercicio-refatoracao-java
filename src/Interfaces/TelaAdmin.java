@@ -60,12 +60,16 @@ public class TelaAdmin extends JFrame {
 		});
 		
 		JButton btnNewButton = new JButton("Usu\u00E1rio por CPF");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
+				TelaUsuarioPorCpf tela_usuario_cpf;
 				if(!cpfTextField.getText().isEmpty()){	
-					lista_usuarios.getUsuarioPorCpf(cpfTextField.getText());
-				}					
-			}
+					tela_usuario_cpf = new TelaUsuarioPorCpf(lista_usuarios.getUsuarioPorCpf(cpfTextField.getText()));
+					tela_usuario_cpf.setVisible(true);
+				}else{
+					System.out.println("Não há cpf no campo");
+				}
+			}	
 		});
 		
 		cpfTextField = new JTextField();
@@ -94,11 +98,13 @@ public class TelaAdmin extends JFrame {
 		});
 		
 		JLabel num_sociosLabel = new JLabel("0");
+		JLabel num_n_sociosLabel = new JLabel("0");
 		
 		JButton btnNewButton_1 = new JButton("Todos os usu\u00E1rios s\u00F3cios");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				num_sociosLabel.setText(lista_usuarios.getSocios().toString());
+				num_n_sociosLabel.setText(lista_usuarios.getNumeroNaoSocios().toString());
 			}
 		});
 		
@@ -109,6 +115,10 @@ public class TelaAdmin extends JFrame {
 		JLabel lblPessoas = new JLabel("Pessoas:");
 		
 		JLabel lblPessoas_1 = new JLabel("Socios:");
+		
+		JLabel lblNoSocios = new JLabel("N\u00E3o socios:");
+		
+		
 		
 		
 		
@@ -130,7 +140,11 @@ public class TelaAdmin extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblPessoas_1)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(num_sociosLabel))
+							.addComponent(num_sociosLabel)
+							.addGap(27)
+							.addComponent(lblNoSocios)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(num_n_sociosLabel))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnNmeroDePessoas)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -151,7 +165,7 @@ public class TelaAdmin extends JFrame {
 							.addComponent(lblFeminino)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(valor_femininoLabel)))
-					.addContainerGap(85, Short.MAX_VALUE))
+					.addContainerGap(83, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -178,7 +192,9 @@ public class TelaAdmin extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton_1)
 						.addComponent(lblPessoas_1)
-						.addComponent(num_sociosLabel))
+						.addComponent(num_sociosLabel)
+						.addComponent(lblNoSocios)
+						.addComponent(num_n_sociosLabel))
 					.addGap(35))
 		);
 		contentPane.setLayout(gl_contentPane);

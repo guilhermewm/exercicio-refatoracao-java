@@ -124,29 +124,33 @@ public class TelaUsuarios extends JFrame {
 				String genero = generoComboBox.getSelectedItem().toString();	
 				
 				if(nome.trim().isEmpty() == false && cpf.trim().isEmpty() == false && idade.trim().isEmpty() == false){
-					if(socioSimRadioButton.isSelected()){
-						if(numeroSocioTextField.getText().trim().isEmpty() == false){							
-							if(lista_usuarios.verificaSeSocioExiste(Integer.valueOf(numeroSocioTextField.getText())) == true){
-								System.out.println("Este id de sócio já está cadastrado");
-							}else{
-								if(genero == "Masculino"){
-									usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
-								}else{
-									usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
-								}
-								lista_usuarios.addUsuario(usuario);
-							}							
-						}else{
-							System.out.println("Falta preencher alguns campos");
-						}						
+					if(lista_usuarios.verificaSeCpfExiste(cpf) == true){
+						System.out.println("CPF já cadastrado");
 					}else{
-						if(genero == "Masculino"){
-							usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.NAO, 0);
+						if(socioSimRadioButton.isSelected()){
+							if(numeroSocioTextField.getText().trim().isEmpty() == false){							
+								if(lista_usuarios.verificaSeSocioExiste(Integer.valueOf(numeroSocioTextField.getText())) == true){
+									System.out.println("Este id de sócio já está cadastrado");
+								}else{
+									if(genero == "Masculino"){
+										usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
+									}else{
+										usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
+									}
+									lista_usuarios.addUsuario(usuario);
+								}							
+							}else{
+								System.out.println("Falta preencher alguns campos");
+							}						
 						}else{
-							usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.NAO, 0);
+							if(genero == "Masculino"){
+								usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.MASCULINO, Socio.NAO, 0);
+							}else{
+								usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.NAO, 0);
+							}
+							lista_usuarios.addUsuario(usuario);
 						}
-						lista_usuarios.addUsuario(usuario);
-					}
+					}	
 				}else{
 					System.out.println("Falta preencher alguns campos");
 				}

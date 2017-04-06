@@ -7,21 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Classes.Usuario;
-
 import javax.swing.JScrollPane;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 
-public class TelaTodosOsUsuarios extends JDialog {
-	private static Map<String, Usuario> list_todos_usuarios;
+public class TelaUsuarioPorCpf extends JDialog {
 
+	private static String usuario_cpf;
 	private final JPanel contentPanel = new JPanel();
 
 	/**
@@ -29,7 +25,7 @@ public class TelaTodosOsUsuarios extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			TelaTodosOsUsuarios dialog = new TelaTodosOsUsuarios(list_todos_usuarios);
+			TelaUsuarioPorCpf dialog = new TelaUsuarioPorCpf(usuario_cpf);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,8 +36,8 @@ public class TelaTodosOsUsuarios extends JDialog {
 	 * Create the dialog.
 	 * @param string 
 	 */
-	public TelaTodosOsUsuarios(Map<String, Usuario> list_todos_usuarios) {
-		list_todos_usuarios = list_todos_usuarios;
+	public TelaUsuarioPorCpf(String usuario) {
+		usuario_cpf = usuario;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,14 +61,8 @@ public class TelaTodosOsUsuarios extends JDialog {
 		
 		JList list = new JList();
 		scrollPane.setViewportView(list);		
-		DefaultListModel dlm = new DefaultListModel();			
-		if(list_todos_usuarios.size() > 0){			
-			for (String key : list_todos_usuarios.keySet()){            
-				dlm.addElement(list_todos_usuarios.get(key));
-			}	
-		}else{
-			dlm.addElement("Não há pessoas no estabelecimento");
-		}			
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.addElement(usuario_cpf);		
 		list.setModel(dlm);
 		
 		contentPanel.setLayout(gl_contentPanel);
@@ -84,7 +74,7 @@ public class TelaTodosOsUsuarios extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TelaTodosOsUsuarios.this.dispose();
+						TelaUsuarioPorCpf.this.dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -95,7 +85,7 @@ public class TelaTodosOsUsuarios extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TelaTodosOsUsuarios.this.dispose();
+						TelaUsuarioPorCpf.this.dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
