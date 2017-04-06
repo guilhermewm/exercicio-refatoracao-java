@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.sql.rowset.spi.TransactionalWriter;
+
 public class ListaDeUsuarios {
 	private Map<String, Usuario> lista_usuarios;
 	
@@ -12,7 +14,41 @@ public class ListaDeUsuarios {
 	}
 	
 	public void addUsuario(Usuario value){
-		lista_usuarios.put(value.getCpf(), value);						
+		
+		if(value.getNome().isEmpty()){
+			throw new IllegalArgumentException("Não há um nome: " + value.getNome());
+		}else if(value.getCpf().isEmpty()){
+			throw new IllegalArgumentException("Não há um cpf: " + value.getCpf());
+		}else if(value.getIdade().toString().isEmpty() || value.getIdade() == 0){
+			throw new IllegalArgumentException("Não há uma idade: " + value.getIdade());
+		}else if(!value.getGenero().equals(Genero.FEMININO)  && !value.getGenero().equals(Genero.MASCULINO)){
+			throw new IllegalArgumentException("Não há um genero: " + value.getGenero());
+		}else if(!value.getSocio().equals(Socio.SIM) && !value.getSocio().equals(Socio.NAO)){
+			throw new IllegalArgumentException("Não há uma definição de associação: " + value.getSocio());
+		}else if(value.getSocio().equals(Socio.SIM)){
+			if(value.getNum_socio().toString().isEmpty() || value.getNum_socio() == 0){
+				throw new IllegalArgumentException("Não é um numero de sócio valido: " + value.getNum_socio());
+			}else{
+				if(verificaSeCpfExiste(value.getCpf())){
+					throw new IllegalArgumentException("CPF já cadastrado: " + value.getCpf());
+				}else if(verificaSeSocioExiste(value.getNum_socio())){
+					throw new IllegalArgumentException("Numero do socio já cadastrado: " + value.getNum_socio());	
+				}else{
+					lista_usuarios.put(value.getCpf(), value);
+				}
+			}
+		}else{
+			if(value.getSocio().equals(Socio.NAO)){
+				if(value.getNum_socio().toString().isEmpty() || value.getNum_socio() != 0){
+					throw new IllegalArgumentException("Não é um numero de sócio valido: " + value.getNum_socio());
+				}else if(verificaSeCpfExiste(value.getCpf())) {
+					throw new IllegalArgumentException("CPF já cadastrado: " + value.getCpf());
+				}else{
+					lista_usuarios.put(value.getCpf(), value);
+				}
+			}
+		}
+							
 	}	
 	
 	
@@ -31,12 +67,10 @@ public class ListaDeUsuarios {
 	}
 	
 	public Integer getNumeroDePessoas(){
-		int cont = 0;		
-		
+		int cont = 0;
 		for (String key : lista_usuarios.keySet()) {            
 			cont++;			
 		}
-			
 		return cont;
 	}	
 	

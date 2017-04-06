@@ -24,6 +24,13 @@ public class TelaAdmin extends JFrame {
 	private JPanel contentPane;
 	private static ListaDeUsuarios lista_usuarios;
 	private JTextField cpfTextField;
+	private JLabel valor_masculinoLabel = new JLabel("0.0%");
+	private JLabel valor_femininoLabel = new JLabel("0.0%");
+	
+	private JLabel num_sociosLabel = new JLabel("0");
+	private JLabel num_n_sociosLabel = new JLabel("0");
+	
+	private JLabel num_pessoasLabel = new JLabel("0");
 	
 	/**
 	 * Launch the application.
@@ -51,6 +58,11 @@ public class TelaAdmin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		setNumeroPessoas();	
+		setPorcentagemDeGeneros();
+		setNumeroDeSociosENaoSocios();
+		
+		
 		JButton btnTodosOsUsurios = new JButton("Todos os usu\u00E1rios");
 		btnTodosOsUsurios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,35 +88,30 @@ public class TelaAdmin extends JFrame {
 		cpfTextField.setColumns(10);
 		
 		
-		JLabel num_pessoasLabel = new JLabel("0");
+		
+		
+		
 		
 		JButton btnNmeroDePessoas = new JButton("N\u00FAmero de pessoas no local");
 		btnNmeroDePessoas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				num_pessoasLabel.setText(lista_usuarios.getNumeroDePessoas().toString());				
+				setNumeroPessoas();				
 			}
 		});
-		
-		JLabel valor_masculinoLabel = new JLabel("0.0%");
-		
-		JLabel valor_femininoLabel = new JLabel("0.0%");
 		
 		JButton btnPorcentagemGnero = new JButton("Porcentagem g\u00EAnero");
 		btnPorcentagemGnero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				valor_femininoLabel.setText(lista_usuarios.getQuantidadeFeminino() + "%");
-				valor_masculinoLabel.setText(lista_usuarios.getQuantidadeMasculino() + "%");
+				setPorcentagemDeGeneros();
 			}
 		});
 		
-		JLabel num_sociosLabel = new JLabel("0");
-		JLabel num_n_sociosLabel = new JLabel("0");
+		
 		
 		JButton btnNewButton_1 = new JButton("Todos os usu\u00E1rios s\u00F3cios");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				num_sociosLabel.setText(lista_usuarios.getSocios().toString());
-				num_n_sociosLabel.setText(lista_usuarios.getNumeroNaoSocios().toString());
+				setNumeroDeSociosENaoSocios();
 			}
 		});
 		
@@ -199,4 +206,19 @@ public class TelaAdmin extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	public void setNumeroPessoas(){
+		num_pessoasLabel.setText(lista_usuarios.getNumeroDePessoas().toString());
+	}
+	
+	public void setPorcentagemDeGeneros(){
+		valor_femininoLabel.setText(lista_usuarios.getQuantidadeFeminino() + "%");
+		valor_masculinoLabel.setText(lista_usuarios.getQuantidadeMasculino() + "%");
+	}
+	
+	public void setNumeroDeSociosENaoSocios(){
+		num_sociosLabel.setText(lista_usuarios.getSocios().toString());
+		num_n_sociosLabel.setText(lista_usuarios.getNumeroNaoSocios().toString());
+	}
+	
 }
