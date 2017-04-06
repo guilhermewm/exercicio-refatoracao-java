@@ -1,4 +1,4 @@
-package Interfaces;
+package uinterface;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Classes.ListaDeUsuarios;
-import Classes.Usuario;
+import business.ListaDeUsuarios;
+import business.Usuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package Classes;
+package business;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,17 +14,17 @@ public class ListaDeUsuarios {
 	}
 	
 	public void addUsuario(Usuario value){
-		
+		System.out.println(value.getNum_socio());
 		if(value.getNome().isEmpty()){
 			throw new IllegalArgumentException("Não há um nome: " + value.getNome());
 		}else if(value.getCpf().isEmpty()){
 			throw new IllegalArgumentException("Não há um cpf: " + value.getCpf());
 		}else if(value.getIdade().toString().isEmpty() || value.getIdade() == 0){
 			throw new IllegalArgumentException("Não há uma idade: " + value.getIdade());
-		}else if(!value.getGenero().equals(Genero.FEMININO)  && !value.getGenero().equals(Genero.MASCULINO)){
-			throw new IllegalArgumentException("Não há um genero: " + value.getGenero());
-		}else if(!value.getSocio().equals(Socio.SIM) && !value.getSocio().equals(Socio.NAO)){
-			throw new IllegalArgumentException("Não há uma definição de associação: " + value.getSocio());
+		}else if((!value.getGenero().equals(Genero.FEMININO)  && !value.getGenero().equals(Genero.MASCULINO)) || value.getGenero().equals(null)){
+			throw new NullPointerException("Não há um genero: " + value.getGenero());
+		}else if((!value.getSocio().equals(Socio.SIM) && !value.getSocio().equals(Socio.NAO)) || value.getSocio().equals(null)){
+			throw new NullPointerException("Não há uma definição de associação: " + value.getSocio());
 		}else if(value.getSocio().equals(Socio.SIM)){
 			if(value.getNum_socio().toString().isEmpty() || value.getNum_socio() == 0){
 				throw new IllegalArgumentException("Não é um numero de sócio valido: " + value.getNum_socio());
@@ -39,7 +39,7 @@ public class ListaDeUsuarios {
 			}
 		}else{
 			if(value.getSocio().equals(Socio.NAO)){
-				if(value.getNum_socio().toString().isEmpty() || value.getNum_socio() != 0){
+				if(!value.getNum_socio().toString().isEmpty() && !value.getNum_socio().equals(0)){
 					throw new IllegalArgumentException("Não é um numero de sócio valido: " + value.getNum_socio());
 				}else if(verificaSeCpfExiste(value.getCpf())) {
 					throw new IllegalArgumentException("CPF já cadastrado: " + value.getCpf());
