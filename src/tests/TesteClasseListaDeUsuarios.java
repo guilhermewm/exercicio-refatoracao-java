@@ -53,10 +53,7 @@ public class TesteClasseListaDeUsuarios {
 		
 		usuario_com_cpf_x_socio = new Usuario("Maria", "59874632875", 19, Genero.FEMININO, Socio.SIM, 10);
 		usuario_com_cpf_x_tambem_socio = new Usuario("Fernanda", "59874632875", 20, Genero.FEMININO, Socio.SIM, 9);
-		
-		
-		
-		
+				
 	}
 	
 	
@@ -69,9 +66,105 @@ public class TesteClasseListaDeUsuarios {
 		assertEquals(expected, usuario_completo.toString());
 	}
 	
+	@Test
+	public void testaSeRetornaUmUsuarioComCpfValido(){
+		lista.addUsuario(usuario_completo);
+		String expected = lista.getUsuarioPorCpf(usuario_completo.getCpf());
+		assertEquals(expected, usuario_completo.toString());
+	}
 	
+	@Test
+	public void testaSeRetornaONumeroDePessoas(){
+		lista.addUsuario(usuario_completo);
+		int actual = lista.getNumeroDePessoas();
+		assertEquals(1, actual);
+	}
 	
+	@Test
+	public void testaSeRetornaONumeroDeNaoSocios(){
+		lista.addUsuario(usuario_completo);
+		lista.addUsuario(usuario_com_cpf_x_nao_socio);
+		lista.addUsuario(usuario_com_numero_socio_x);
+		
+		int actual = lista.getNumeroNaoSocios();
+		assertEquals(2, actual);
+	}
 	
+	@Test
+	public void testaSeRetornaONumeroDePessoasDeSexoMasculinoQuandoForMaiorQueZero(){
+		lista.addUsuario(usuario_completo);
+		lista.addUsuario(usuario_com_cpf_x_nao_socio);
+		lista.addUsuario(usuario_com_numero_socio_x);
+		double actual = lista.getQuantidadeMasculino();
+		assertEquals(33.0, actual, 0.00);
+	}
+	
+	@Test
+	public void testaSeRetornaONumeroDePessoasDeSexoMasculinoQuandoForZero(){	
+		lista.addUsuario(usuario_com_cpf_x_nao_socio);
+		double actual = lista.getQuantidadeMasculino();
+		assertEquals(0.0, actual, 0.00);
+	}
+	
+	@Test
+	public void testaSeRetornaONumeroDePessoasDeSexoFemininoQuandoForMaiorQueZero(){
+		lista.addUsuario(usuario_completo);
+		lista.addUsuario(usuario_com_cpf_x_nao_socio);
+		lista.addUsuario(usuario_com_numero_socio_x);
+		double actual = lista.getQuantidadeFeminino();
+		assertEquals(66.0, actual, 0.00);
+	}
+	
+	@Test
+	public void testaSeRetornaONumeroDePessoasDeSexoFemininoQuandoForZero(){	
+		lista.addUsuario(usuario_completo);
+		double actual = lista.getQuantidadeFeminino();
+		assertEquals(0.0, actual, 0.00);
+	}
+	
+	@Test
+	public void testaSeRetornaONumeroDeSocios(){	
+		lista.addUsuario(usuario_completo);
+		lista.addUsuario(usuario_com_cpf_x_socio);
+		int actual = lista.getSocios();
+		assertEquals(1, actual);
+	}
+	
+	@Test
+	public void testaSeSocioDeDeterminadoIdExiste(){			
+		lista.addUsuario(usuario_com_cpf_x_socio);		
+		boolean actual = lista.verificaSeSocioExiste(usuario_com_cpf_x_socio.getNum_socio());
+		assertEquals(true, actual);
+	}
+	
+	@Test
+	public void testaSeSocioDeDeterminadoIdNaoExiste(){			
+		lista.addUsuario(usuario_com_cpf_x_socio);		
+		boolean actual = lista.verificaSeSocioExiste(4587);
+		assertEquals(false, actual);
+	}
+	
+	@Test
+	public void testaSeSocioDeDeterminadoCpfExiste(){			
+		lista.addUsuario(usuario_com_cpf_x_socio);		
+		boolean actual = lista.verificaSeCpfExiste(usuario_com_cpf_x_socio.getCpf());
+		assertEquals(true, actual);
+	}
+	
+	@Test
+	public void testaSeSocioDeDeterminadoCpfNaoExiste(){			
+		lista.addUsuario(usuario_com_cpf_x_socio);		
+		boolean actual = lista.verificaSeCpfExiste("215411");
+		assertEquals(false, actual);
+	}
+	
+	@Test
+	public void testaSeSocioSaiDoEstabelecimento(){			
+		lista.addUsuario(usuario_com_cpf_x_socio);	
+		lista.saiUsuario(usuario_com_cpf_x_socio.getCpf());	
+		int actual = lista.getNumeroDePessoas();
+		assertEquals(0, actual);
+	}
 	
 	
 	
@@ -127,6 +220,12 @@ public class TesteClasseListaDeUsuarios {
 	@Test (expected = NullPointerException.class)
 	public void testaSeUmUsuarioSemAssociacaoEAdicionado() {			
 		lista.addUsuario(usuario_sem_associacao);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testaSeRetornaUmUsuarioComCpfValidoSemEstarCadastrado(){
+		lista.addUsuario(usuario_completo);
+		lista.getUsuarioPorCpf("123654789");		
 	}
 	
 	

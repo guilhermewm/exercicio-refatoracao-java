@@ -62,7 +62,7 @@ public class ListaDeUsuarios {
 		if(lista_usuarios.containsKey(cpf)){
 			return lista_usuarios.get(cpf).toString();
 		}else{
-			return "Não há usuario com esse cpf";
+			throw new IllegalArgumentException("Não há usuario com esse cpf: " + cpf);			
 		}	
 	}
 	

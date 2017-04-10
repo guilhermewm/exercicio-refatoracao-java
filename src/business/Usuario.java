@@ -34,49 +34,36 @@ public class Usuario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 
 	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+
 
 	public Integer getIdade() {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
+
 
 	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
+
 
 	public Socio getSocio() {
 		return socio;
 	}
 
-	public void setSocio(Socio socio) {
-		this.socio = socio;
-	}
+	
 	
 	public Integer getNum_socio() {
 		return num_socio;
 	}
 
-	public void setNum_socio(int num_socio) {
-		this.num_socio = num_socio;
-	}
 	
 	
 	
