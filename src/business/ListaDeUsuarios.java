@@ -140,7 +140,15 @@ public class ListaDeUsuarios {
 		}
 	}
 	
-	public void saiUsuario(String cpf){				
-		lista_usuarios.remove(cpf);	
+	public void saiUsuario(String cpf){	
+		if(verificaSeCpfExiste(cpf) == true){
+			lista_usuarios.remove(cpf);				
+		}else{
+			throw new IllegalArgumentException("Usuário com este cpf não está no restaurante: " + cpf);
+		}
+	}
+	
+	public void saiTodosOsUsuarios(){
+		lista_usuarios.clear();
 	}
 }

@@ -13,6 +13,7 @@ import business.Genero;
 import business.ListaDeUsuarios;
 import business.Socio;
 import business.Usuario;
+import persistence.CriacaoDeArquivo;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -34,6 +35,7 @@ public class TelaUsuarios extends JFrame {
 	private JLabel lblGenero;
 	private JTextField numeroSocioTextField;
 	private static ListaDeUsuarios lista_usuarios;
+	private static CriacaoDeArquivo cria_arquivo;
 
 	/**
 	 * Launch the application.
@@ -42,7 +44,7 @@ public class TelaUsuarios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaUsuarios frame = new TelaUsuarios(lista_usuarios);
+					TelaUsuarios frame = new TelaUsuarios(lista_usuarios, cria_arquivo);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +57,9 @@ public class TelaUsuarios extends JFrame {
 	 * Create the frame.
 	 * @param lista_usuarios 
 	 */
-	public TelaUsuarios(ListaDeUsuarios lista_usuarios) {
+	public TelaUsuarios(ListaDeUsuarios lista_usuarios, CriacaoDeArquivo cria_arquivo) {
 		this.lista_usuarios = lista_usuarios;
+		this.cria_arquivo = cria_arquivo;
 		setBounds(100, 100, 450, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -132,6 +135,7 @@ public class TelaUsuarios extends JFrame {
 								usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.SIM, Integer.valueOf(numeroSocioTextField.getText()));
 							}
 							lista_usuarios.addUsuario(usuario);
+							cria_arquivo.addUsuario(usuario);
 						}else{
 							System.out.println("Falta preencher alguns campos");
 						}
@@ -142,6 +146,7 @@ public class TelaUsuarios extends JFrame {
 							usuario = new Usuario(nome, cpf, Integer.valueOf(idade), Genero.FEMININO, Socio.NAO, null);
 						}
 						lista_usuarios.addUsuario(usuario);
+						cria_arquivo.addUsuario(usuario);
 					}
 				}else{
 					System.out.println("Falta preencher alguns campos");

@@ -1,0 +1,3 @@
++--Dia 0--+
+{fsaf=      Nome :fsafsa, CPF: fsaf, Idade: 22, Genero: MASCULINO, Socio: NAO, Numero sócio: 0
+}

@@ -166,6 +166,14 @@ public class TesteClasseListaDeUsuarios {
 		assertEquals(0, actual);
 	}
 	
+	@Test
+	public void testaSeTodosOsUsuariosSaem(){			
+		lista.addUsuario(usuario_completo);	
+		lista.saiTodosOsUsuarios();
+		int actual = lista.getNumeroDePessoas();
+		assertEquals(0, actual);
+	}
+	
 	
 	
 	
@@ -228,6 +236,11 @@ public class TesteClasseListaDeUsuarios {
 		lista.getUsuarioPorCpf("123654789");		
 	}
 	
+	@Test (expected = IllegalArgumentException.class)
+	public void testaSeUmSocioNaoSaiDoRestaurante() {	
+		lista.addUsuario(usuario_completo);
+		lista.saiUsuario("teste");
+	}
 	
 	
 }

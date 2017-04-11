@@ -12,8 +12,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", genero=" + genero + ", socio=" + socio
-				+ ", num_socio=" + num_socio + "]";
+		return "      Nome :" + nome + ", CPF: " + cpf + ", Idade: " + idade + ", Genero: " + genero + ", Socio: " + socio
+				+ ", Numero sócio: " + num_socio + "\n";
 	}
 
 	public Usuario(String nome, String cpf, Integer idade, Genero genero, Socio socio, Integer num_socio) {
