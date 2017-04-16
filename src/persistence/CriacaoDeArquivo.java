@@ -31,7 +31,18 @@ public class CriacaoDeArquivo {
 	    gravarArq.close();	
 	    lista_usuarios_arquivo.clear();
 	    count++;
+	}	
+
+	
+	public String getUsuarioPorCpf(String cpf){
+		System.out.println(cpf);
+		if(lista_usuarios_arquivo.containsKey(cpf)){
+			return lista_usuarios_arquivo.get(cpf).toString();
+		}else{
+			throw new IllegalArgumentException("Não há usuario com esse cpf: " + cpf);			
+		}	
 	}
+
 	
 	
 }
